@@ -1,14 +1,26 @@
 
-import { View, Button, Alert, ActivityIndicator, Text } from "react-native";
-import Greet from "./components/Greet";
+import { View, Text, StyleSheet } from "react-native";
 
 
 export default function App() {
 
   return (
-    <View style={{ flex: 1, backgroundColor: "red", padding: 60 }}>
-      <Greet name="John" />
+    <View style={styles.container}>
+      <Text style={styles.Text}>Hello</Text>
     </View>
 
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  Text: {
+    color: 'red',
+    fontSize: 30
+  }
+});
