@@ -6,6 +6,10 @@ export default function App() {
     <View style={{ flex: 1, backgroundColor: "red" }}>
       <View style={{ height: 100, width: 100, backgroundColor: "blue" }}></View>
       <View style={{ height: 100, width: 100, backgroundColor: "green" }}>
+        <Text>
+          <Text style={{color: "white"}}>Hello</Text>
+          {" Jay"}
+        </Text>
       </View>
     </View>
   );
