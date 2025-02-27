@@ -17,10 +17,15 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: 400,
+    // flex: 1,
+    height: 300,
     flexWrap: "wrap",
-    alignContent : "space-between",
+    rowGap: 10,
+    columnGap: 40,
+    gap: 20,
+
+
+    // alignContent : "space-between",
 
     // flexDirection: "row",
     // height:300,
