@@ -17,12 +17,20 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    height: 300,
-    flexWrap: "wrap",
-    rowGap: 10,
-    columnGap: 40,
-    gap: 20,
+    flex: 1,
+
+
+
+
+
+
+
+
+    // height: 300,
+    // flexWrap: "wrap",
+    // rowGap: 10,
+    // columnGap: 40,
+    // gap: 20,
 
 
     // alignContent : "space-between",
