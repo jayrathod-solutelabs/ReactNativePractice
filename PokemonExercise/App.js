@@ -55,6 +55,9 @@ export default function App() {
           }}
           keyExtractor={(item, index) => item.id.toString()}
           ItemSeparatorComponent={() => <View style={styles.separator} />}
+          ListEmptyComponent={() => <Text>No data available</Text>}
+          ListHeaderComponent={() => <Text style={styles.headerText}>List</Text>}
+          ListFooterComponent={() => <Text style={styles.headerText}>Footer</Text>}
         />
 
       </View>
@@ -86,4 +89,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#CCCCCC',
     marginVertical: 8,
   },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 16,
+    marginBottom: 8,
+    color: '#333',
+    textAlign: 'center',
+  }
 });
