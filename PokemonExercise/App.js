@@ -54,6 +54,7 @@ export default function App() {
             );
           }}
           keyExtractor={(item, index) => item.id.toString()}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
         />
 
       </View>
@@ -71,14 +72,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     padding: 16,
     borderRadius: 8,
-    marginBottom: 16,
+    // marginBottom: 16,
     borderWidth: 1,
+    marginHorizontal: 16,
   },
   ScrollViewStyle: {
-    paddingHorizontal: 16,
   },
   cardText: {
     fontSize: 30,
   },
-
+  separator: {
+    height: 2,
+    backgroundColor: '#CCCCCC',
+    marginVertical: 8,
+  },
 });
