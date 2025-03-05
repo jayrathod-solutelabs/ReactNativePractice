@@ -1,5 +1,6 @@
-import { StyleSheet, SafeAreaView, Platform, ScrollView } from "react-native";
-import PokemonCard from "./components/PokemonCard";
+import { StyleSheet, SafeAreaView, Platform, ScrollView, View, Text, StatusBar } from "react-native";
+import pokemonList from "./data.json";
+import { FlatList } from "react-native";
 
 export default function App() {
   const charmanderData = {
@@ -40,12 +41,22 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <PokemonCard {...charmanderData} />
-        <PokemonCard {...squirtleData} />
-        <PokemonCard {...bulbasaurData} />
-        <PokemonCard {...pikachuData} />
-      </ScrollView>
+      <View style={styles.ScrollViewStyle}>
+        <FlatList
+          data={pokemonList}
+          renderItem={({ item }) => {
+            console.log(item.id);
+            return (
+              <View style={styles.card} key={item.id}>
+                <Text style={styles.cardText}>{item.type}</Text>
+                <Text style={styles.cardText}>{item.name}</Text>
+              </View>
+            );
+          }}
+          keyExtractor={(item, index) => item.id.toString()}
+        />
+
+      </View>
     </SafeAreaView>
   );
 }
@@ -54,6 +65,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F5F5F5",
-    paddingTop: Platform.OS === "android" ? 25 : 0,
+    paddingTop: StatusBar.currentHeight,
   },
+  card: {
+    backgroundColor: "#FFFFFF",
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 16,
+    borderWidth: 1,
+  },
+  ScrollViewStyle: {
+    paddingHorizontal: 16,
+  },
+  cardText: {
+    fontSize: 30,
+  },
+
 });
