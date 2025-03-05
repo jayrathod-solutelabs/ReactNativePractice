@@ -1,28 +1,36 @@
-import { StyleSheet, Text, View , StatusBar, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, SafeAreaView, TextInput, Switch } from 'react-native';
 import React, { useState } from 'react';
 
 export default function App() {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
     <SafeAreaView style={styles.container}>
-      <TextInput 
+      <TextInput
         style={styles.input}
-        placeholder="Enter your name"  
-        value={name} 
-        onChangeText={setName} 
+        placeholder="Enter your name"
+        value={name}
+        onChangeText={setName}
       />
-      <TextInput 
-        style={styles.multiLine} 
-        multiline 
+      <TextInput
+        style={styles.multiLine}
+        multiline
         placeholder="Enter Your Address"
         value={address}
         onChangeText={setAddress}
       />
-      
+
       <Text style={styles.text}>Hello {name}</Text>
       {address ? <Text style={styles.text}>Your address is: {address}</Text> : null}
+
+      <View style={styles.SwitchContainer} >
+        <Text style={[styles.text, { fontSize: 22 }]}>Dark Mode</Text>
+        <Switch value={isDarkMode} onValueChange={() => setIsDarkMode(!isDarkMode)}></Switch>
+
+      </View>
+
 
     </SafeAreaView>
   );
@@ -53,5 +61,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     minHeight: 100,
     textAlignVertical: "top"
+  },
+  SwitchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: 12,
+
   }
 });
