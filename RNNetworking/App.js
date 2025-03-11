@@ -9,32 +9,47 @@ export default function App() {
   const [postTitle, setPostTitle] = useState("");
   const [postBody, setPostBody] = useState("");
   const [isPosting, setIsPosting] = useState(false);
+  const [error, setError] = useState("");
 
   const fetchData = async (limit = 10) => {
-    const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}`);
-    const data = await response.json();
-    setPostList(data);
-    setisLoading(false);
+    try {
+      setisLoading(true);
+      const response = await fetch(`https://jsonplhjghjde.com/posts?_limit=${limit}`);
+      const data = await response.json();
+      setPostList(data);
+      setisLoading(false);
+      setError("");
+    } catch (error) {
+      setError(error);
+      setisLoading(false);
+      setError(error);
+    }
 
   }
 
  const addPost = async () => {
   setIsPosting(true);
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: postTitle,
-      body: postBody,
-    }),
-  });
-  const data = await response.json();
-  setPostList([data, ...postList]);
-  setPostTitle("");
-  setPostBody("");
-  setIsPosting(false);
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: postTitle,
+        body: postBody,
+      }),
+    });
+    const data = await response.json();
+    setPostList([data, ...postList]);
+    setPostTitle("");
+    setPostBody("");
+    setIsPosting(false);
+    setError("");
+  }catch (error) {
+    setError(error);
+  }
+  
  }
 
   useEffect(() => {
@@ -58,41 +73,46 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.formContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="Title"
-          value={postTitle}
-          onChangeText={setPostTitle}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Body"
-          value={postBody}
-          onChangeText={setPostBody}
-        />
-        <Button
-          title={isPosting ? "Posting..." : "Add Post"}
-          onPress={addPost}
-          disabled={isPosting}>
-
-        </Button>
-
-
-      </View>
-      <View style={styles.listContainer}>
-        <FlatList
-          data={postList}
-          renderItem={({ item }) => (
-            <View style={styles.card}>
-              <Text style={styles.titleText}>{item.title}</Text>
-              <Text style={styles.bodyText}>{item.body}</Text>
-            </View>
-          )}
-          refreshing={refreshing}
-          onRefresh={handleRefresh}
-        />
-      </View>
+      {error ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>{error.message}</Text>
+        </View>
+      ) : (
+        <>
+          <View style={styles.formContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Title"
+              value={postTitle}
+              onChangeText={setPostTitle}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Body"
+              value={postBody}
+              onChangeText={setPostBody}
+            />
+            <Button
+              title={isPosting ? "Posting..." : "Add Post"}
+              onPress={addPost}
+              disabled={isPosting}
+            />
+          </View>
+          <View style={styles.listContainer}>
+            <FlatList
+              data={postList}
+              renderItem={({ item }) => (
+                <View style={styles.card}>
+                  <Text style={styles.titleText}>{item.title}</Text>
+                  <Text style={styles.bodyText}>{item.body}</Text>
+                </View>
+              )}
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+            />
+          </View>
+        </>
+      )}
     </SafeAreaView>
   );
 }
@@ -142,5 +162,16 @@ const styles = StyleSheet.create({
   
     borderRadius: 8,
     marginBottom: 16,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+    paddingTop: StatusBar.currentHeight,
+  },
+  errorText: {
+    fontSize: 16,
+    color: 'red',
   },
 });
