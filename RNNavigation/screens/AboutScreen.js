@@ -1,10 +1,11 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 
-export default function AboutScreen() {
+export default function AboutScreen({route}) {
+  const {name} = route.params
   return (
     <View>
-      <Text>About Screen</Text>
+      <Text>About Screen Name is : {name}</Text>
     </View>
   );
 } 
